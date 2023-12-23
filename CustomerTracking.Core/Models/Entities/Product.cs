@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CustomerTracking.Core
+namespace CustomerTracking.Core.Models.Entities
 {
-    public class Product:BaseEntity
+    public class Product : BaseEntity
     {
         public string Name { get; set; }
         public int Stock { get; set; }

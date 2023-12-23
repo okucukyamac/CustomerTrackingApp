@@ -1,4 +1,4 @@
-﻿using CustomerTracking.Core;
+﻿using CustomerTracking.Core.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CustomerTracking.Core
+namespace CustomerTracking.Core.Models.Entities
 {
     public abstract class BaseEntity
     {
