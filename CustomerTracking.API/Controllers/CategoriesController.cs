@@ -11,11 +11,9 @@ namespace CustomerTracking.API.Controllers
     public class CategoriesController : CustomBaseController
     {
         private readonly ICategoryService _categoryService;
-        private readonly IMapper _mapper;
 
         public CategoriesController(IMapper mapper, ICategoryService categoryService)
         {
-            _mapper = mapper;
             _categoryService = categoryService;
         }
 

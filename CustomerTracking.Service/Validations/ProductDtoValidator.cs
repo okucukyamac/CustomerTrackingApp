@@ -14,9 +14,9 @@ namespace CustomerTracking.Service.Validations
         public ProductDtoValidator()
         {
             RuleFor(a => a.Name).NotEmpty().WithMessage("{PropertyName} is required").NotNull().WithMessage("{PropertyName} is required");
-            RuleFor(a => a.Price).InclusiveBetween(1, int.MaxValue).WithMessage("{PropertyName} must be grater 0");
-            RuleFor(a => a.Stock).InclusiveBetween(1, int.MaxValue).WithMessage("{PropertyName} must be grater 0");
-            RuleFor(a => a.CategoryId).InclusiveBetween(1, int.MaxValue).WithMessage("{PropertyName} must be grater 0");
+            RuleFor(a => a.Price).InclusiveBetween(1, int.MaxValue).WithMessage("{PropertyName} must be greater 0");
+            RuleFor(a => a.Stock).InclusiveBetween(1, int.MaxValue).WithMessage("{PropertyName} must be greater 0");
+            RuleFor(a => a.CategoryId).InclusiveBetween(1, int.MaxValue).WithMessage("{PropertyName} must be greater 0");
         }
     }
 }
