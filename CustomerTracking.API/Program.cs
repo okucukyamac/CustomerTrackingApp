@@ -23,6 +23,9 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
+builder.Services.AddScoped<IProductReporsitory, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
 
 builder.Services.AddDbContext<AppDbContext>(a =>
 {

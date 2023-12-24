@@ -12,12 +12,20 @@ namespace CustomerTracking.API.Controllers
     {
 
         private readonly IMapper _mapper;
+        private readonly IProductService _productService;
         private readonly IService<Product> _service;
 
-        public ProductsController(IMapper mapper, IService<Product> service)
+        public ProductsController(IMapper mapper, IService<Product> service, IProductService productService)
         {
             _mapper = mapper;
             _service = service;
+            _productService = productService;
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetProductsWithCategory()
+        {
+            return CreateActionResult(await _productService.GetProductsWithCategory());
         }
 
         [HttpGet]
