@@ -13,12 +13,10 @@ namespace CustomerTracking.API.Controllers
 
         private readonly IMapper _mapper;
         private readonly IProductService _productService;
-        private readonly IService<Product> _service;
 
-        public ProductsController(IMapper mapper, IService<Product> service, IProductService productService)
+        public ProductsController(IMapper mapper, IProductService productService)
         {
             _mapper = mapper;
-            _service = service;
             _productService = productService;
         }
 
@@ -31,7 +29,7 @@ namespace CustomerTracking.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var products = await _service.GetAllAsync();
+            var products = await _productService.GetAllAsync();
 
             var productsDtos = _mapper.Map<List<ProductDto>>(products.ToList());
 
@@ -43,7 +41,7 @@ namespace CustomerTracking.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var product = await _service.GetByIdAsync(id);
+            var product = await _productService.GetByIdAsync(id);
 
             var productDto = _mapper.Map<ProductDto>(product);
 
@@ -53,7 +51,7 @@ namespace CustomerTracking.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(ProductDto productDto)
         {
-            var product = await _service.AddAsync(_mapper.Map<Product>(productDto));
+            var product = await _productService.AddAsync(_mapper.Map<Product>(productDto));
             var productDtoResult = _mapper.Map<ProductDto>(product);
 
 
@@ -63,7 +61,7 @@ namespace CustomerTracking.API.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(ProductUpdateDto productDto)
         {
-            await _service.UpdateAsync(_mapper.Map<Product>(productDto));
+            await _productService.UpdateAsync(_mapper.Map<Product>(productDto));
 
             return CreateActionResult(CustomResponse<NoContent>.Success(204));
         }
@@ -71,8 +69,8 @@ namespace CustomerTracking.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
-            var product = await _service.GetByIdAsync(id);
-            await _service.RemoveAsync(product);
+            var product = await _productService.GetByIdAsync(id);
+            await _productService.RemoveAsync(product);
 
             return CreateActionResult(CustomResponse<NoContent>.Success(204));
         }
