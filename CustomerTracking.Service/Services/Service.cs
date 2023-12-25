@@ -1,6 +1,7 @@
 ﻿using CustomerTracking.Core.Repositories;
 using CustomerTracking.Core.Services;
 using CustomerTracking.Core.UnitOfWorks;
+using CustomerTracking.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,12 @@ namespace CustomerTracking.Service.Services
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _repository.GetByIdAsync(id);
+            var hasProduct = await _repository.GetByIdAsync(id);
+
+            if (hasProduct== null)
+                throw new NotFoundException($"{typeof(T).Name} not found. id: ({id})");
+
+            return hasProduct;
         }
 
         public async Task RemoveAsync(T entity)

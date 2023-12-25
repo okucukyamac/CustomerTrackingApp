@@ -1,4 +1,5 @@
 using CustomerTracking.API.Filters;
+using CustomerTracking.API.Middlewares;
 using CustomerTracking.Core.Repositories;
 using CustomerTracking.Core.Services;
 using CustomerTracking.Core.UnitOfWorks;
@@ -59,6 +60,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCustomException();
 
 app.UseAuthorization();
 
