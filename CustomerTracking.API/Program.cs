@@ -1,5 +1,8 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using CustomerTracking.API.Filters;
 using CustomerTracking.API.Middlewares;
+using CustomerTracking.API.Modules;
 using CustomerTracking.Core.Repositories;
 using CustomerTracking.Core.Services;
 using CustomerTracking.Core.UnitOfWorks;
@@ -31,17 +34,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
-
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 builder.Services.AddAutoMapper(typeof(MapProfile));
-
-builder.Services.AddScoped<IProductReporsitory, ProductRepository>();
-builder.Services.AddScoped<IProductService, ProductService>();
-
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<ICategoryService,CategoryService>();
 
 
 builder.Services.AddDbContext<AppDbContext>(a =>
@@ -51,6 +44,10 @@ builder.Services.AddDbContext<AppDbContext>(a =>
         option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
     });
 });
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepoServiceModule()));
 
 var app = builder.Build();
 

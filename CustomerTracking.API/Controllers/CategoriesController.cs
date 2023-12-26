@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CustomerTracking.API.Filters;
 using CustomerTracking.Core.Models.Entities;
 using CustomerTracking.Core.Services;
 using CustomerTracking.Core.UnitOfWorks;
@@ -16,7 +17,8 @@ namespace CustomerTracking.API.Controllers
         {
             _categoryService = categoryService;
         }
-
+        
+        [ServiceFilter(typeof(NotFoundFilter<Category>))]
         [HttpGet("[action]/{categoryId}")]
         public async Task<IActionResult> GetSingleCategoryByIdWithProducts(int categoryId)
         {
