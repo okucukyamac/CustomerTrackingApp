@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CustomerTracking.Service\CustomerTracking.Service.csproj" />
+    <ProjectReference Include="..\CustomerTracking.Caching\CustomerTracking.Caching.csproj" />
   </ItemGroup>
 
 </Project>

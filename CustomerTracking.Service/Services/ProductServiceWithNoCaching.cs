@@ -13,13 +13,13 @@ using System.Threading.Tasks;
 
 namespace CustomerTracking.Service.Services
 {
-    public class ProductService : Service<Product>, IProductService
+    public class ProductServiceWithNoCaching : Service<Product>, IProductService
     {
         private readonly IProductReporsitory _productReporsitory;
         private readonly IMapper _mapper;
 
 
-        public ProductService(IGenericRepository<Product> repository, IUnitOfWork unitOfWork, IProductReporsitory productReporsitory, IMapper mapper = null) : base(repository, unitOfWork)
+        public ProductServiceWithNoCaching(IGenericRepository<Product> repository, IUnitOfWork unitOfWork, IProductReporsitory productReporsitory, IMapper mapper = null) : base(repository, unitOfWork)
         {
             _productReporsitory = productReporsitory;
             _mapper = mapper;

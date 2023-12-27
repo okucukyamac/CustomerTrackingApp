@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using CustomerTracking.Caching;
 using CustomerTracking.Core.Repositories;
 using CustomerTracking.Core.Services;
 using CustomerTracking.Core.UnitOfWorks;
@@ -34,6 +35,7 @@ namespace CustomerTracking.API.Modules
             builder.RegisterAssemblyTypes(apiAssembly,repoAssembly,serviceAssembly).Where(a=>a.Name.EndsWith
             ("Service")).AsImplementedInterfaces().InstancePerLifetimeScope();
 
+            builder.RegisterType<ProductServiceWithCaching>().As<IProductService>();
         }
 
     }
